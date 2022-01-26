@@ -1,0 +1,4 @@
+cvzone==1.5.4
+numpy==1.22.1
+opencv_python==4.5.5.62
+tensorflow==2.7.0
