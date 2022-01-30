@@ -127,31 +127,24 @@
     "images": [
         {
             "license": 1,
-            "filename": "0.jpg",
-            "width": 233,
-            "height": 255,
+            "filename": "a_0.jpg",
+            "width": 240,
+            "height": 287,
             "id": 0
         },
         {
             "license": 1,
-            "filename": "0.jpg",
-            "width": 193,
-            "height": 369,
-            "id": 0
+            "filename": "b_1.jpg",
+            "width": 228,
+            "height": 412,
+            "id": 1
         },
         {
             "license": 1,
-            "filename": "0.jpg",
-            "width": 269,
-            "height": 268,
-            "id": 0
-        },
-        {
-            "license": 1,
-            "filename": "0.jpg",
-            "width": 260,
-            "height": 281,
-            "id": 0
+            "filename": "c_2.jpg",
+            "width": 293,
+            "height": 302,
+            "id": 2
         }
     ],
     "annotations": [
@@ -159,43 +152,32 @@
             "image_id": 0,
             "id": 0,
             "bbox": [
-                99,
-                179,
-                133,
-                155
+                128,
+                151,
+                140,
+                187
             ],
             "category_id": 0
         },
         {
-            "image_id": 0,
+            "image_id": 1,
             "id": 1,
             "bbox": [
-                134,
-                79,
-                93,
-                269
+                117,
+                118,
+                128,
+                319
             ],
             "category_id": 1
         },
         {
-            "image_id": 0,
+            "image_id": 2,
             "id": 2,
             "bbox": [
-                122,
-                150,
-                169,
-                168
-            ],
-            "category_id": 2
-        },
-        {
-            "image_id": 0,
-            "id": 3,
-            "bbox": [
-                142,
-                149,
-                160,
-                181
+                110,
+                146,
+                193,
+                202
             ],
             "category_id": 2
         }

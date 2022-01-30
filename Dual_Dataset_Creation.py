@@ -42,11 +42,14 @@ def SaveImageObjDetect(key, hand, bbox):
     print("Saving to Obj detection dataset...")
     if os.getcwd() != obj_directory + '/Data':
         os.chdir(obj_directory + '/Data')
+
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
+    filename = f'{letter}_{count}.jpg'
+    cv2.imwrite(filename, hand)
     img_dict = {
         "license" : 1,
-        "filename" : f'{count}.jpg',
+        "filename" : filename,
         "width": w,
         "height": h,
         "id": count
