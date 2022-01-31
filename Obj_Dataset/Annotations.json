@@ -129,22 +129,15 @@
             "license": 1,
             "filename": "a_0.jpg",
             "width": 240,
-            "height": 287,
+            "height": 277,
             "id": 0
         },
         {
             "license": 1,
             "filename": "b_1.jpg",
-            "width": 228,
-            "height": 412,
+            "width": 218,
+            "height": 393,
             "id": 1
-        },
-        {
-            "license": 1,
-            "filename": "c_2.jpg",
-            "width": 293,
-            "height": 302,
-            "id": 2
         }
     ],
     "annotations": [
@@ -152,10 +145,10 @@
             "image_id": 0,
             "id": 0,
             "bbox": [
-                128,
-                151,
+                111,
+                117,
                 140,
-                187
+                177
             ],
             "category_id": 0
         },
@@ -163,23 +156,12 @@
             "image_id": 1,
             "id": 1,
             "bbox": [
-                117,
+                121,
+                104,
                 118,
-                128,
-                319
+                293
             ],
             "category_id": 1
-        },
-        {
-            "image_id": 2,
-            "id": 2,
-            "bbox": [
-                110,
-                146,
-                193,
-                202
-            ],
-            "category_id": 2
         }
     ]
 }

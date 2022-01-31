@@ -14,6 +14,9 @@ obj_directory = os.getcwd() + '/Obj_Dataset'
 f = open(obj_directory + '/Annotations.json')
 Annotations = json.load(f)
 alphabet_dict = {}
+
+
+
 for i, c in enumerate(alphabet):
     alphabet_dict.setdefault(c, i)
 
@@ -31,8 +34,9 @@ def SaveImageClassification(key, hand):
     filename = f'{letter}_{count}.jpg'
     cv2.imwrite(filename, hand)
 
+    return [os.getcwd(), letter, filename]
 
-def SaveImageObjDetect(key, hand, bbox):
+def SaveImageObjDetect(key, img, hand, bbox):
     letter = chr(key)
     if letter == '-':
         letter = "Space"
@@ -46,7 +50,7 @@ def SaveImageObjDetect(key, hand, bbox):
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
     filename = f'{letter}_{count}.jpg'
-    cv2.imwrite(filename, hand)
+    cv2.imwrite(filename, img)
     img_dict = {
         "license" : 1,
         "filename" : filename,
@@ -66,6 +70,9 @@ def SaveImageObjDetect(key, hand, bbox):
     }
     print("     Adding annotation...")
     Annotations['annotations'].append(annotation)
+
+    return [os.getcwd(), filename]
+
 
 
 
@@ -91,12 +98,27 @@ while True:
         cv2.imshow("Hand", hand)
         key = cv2.waitKey(1) & 0xFF
         if chr(key) in alphabet:
-            SaveImageObjDetect(key, hand, bbox)
-            SaveImageClassification(key, hand)
+            obj_undo = SaveImageObjDetect(key, img, hand, bbox)
+            classification_undo = SaveImageClassification(key, hand)
 
 
     cv2.imshow('MainWin', img)
     close = cv2.waitKey(1) & 0xFF
+    if close == ord('/'):
+        # REMOVE LAST ITEM FROM THE OBJECT DETECTION DATASET
+        if os.getcwd() != obj_directory + '/Data':
+            os.chdir(obj_undo[0])
+        os.remove(obj_undo[1])
+        print(f'IN OBJ DATASET REMOVED FROM {obj_undo[0]} THE FILE {obj_undo[1]}')
+        Annotations['images'].pop()
+        Annotations['annotations'].pop()
+
+        # REMOVE LAST ITEM FROM THE CLASSIFICATION DATASET
+        if os.getcwd() != classification_directory + f'/{classification_undo[1]}':
+            os.chdir(classification_directory + f'/{classification_undo[1]}')
+        os.remove(classification_undo[2])
+
+        print(f'IN CLASSIFICATION DATASET REMOVED FROM {classification_undo[0]} THE FILE {classification_undo[2]}')
 
     if close == ord("."):
         json_file = json.dumps(Annotations, indent=4)
