@@ -17,10 +17,7 @@ alphabet_dict = {}
 
 # Change initial HERE
 initial = 'A'
-#Change Image classification offset
-classification_offset = 0
-
-# Change Object detection offset
+#Change Object detection offset
 obj_offset = 0
 
 for i, c in enumerate(alphabet):
@@ -38,7 +35,7 @@ def SaveImageClassification(key, hand):
         os.chdir(classification_directory + f'/{letter}')
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
 
-    filename = f'{letter}_{initial}_{count + classification_offset}.jpg'
+    filename = f'{letter}_{initial}_{count}.jpg'
     cv2.imwrite(filename, hand)
 
     return [os.getcwd(), letter, filename]
@@ -57,7 +54,7 @@ def SaveImageObjDetect(key, img, hand, bbox):
 
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
-    filename = f'{letter}_{initial}_{count + obj_offset}.jpg'
+    filename = f'{letter}_{initial}_{count}.jpg'
     cv2.imwrite(filename, img)
     img_dict = {
         "license" : 1,
