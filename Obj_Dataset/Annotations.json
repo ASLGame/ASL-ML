@@ -125,43 +125,9 @@
         }
     ],
     "images": [
-        {
-            "license": 1,
-            "filename": "a_0.jpg",
-            "width": 240,
-            "height": 277,
-            "id": 0
-        },
-        {
-            "license": 1,
-            "filename": "b_1.jpg",
-            "width": 218,
-            "height": 393,
-            "id": 1
-        }
+
     ],
     "annotations": [
-        {
-            "image_id": 0,
-            "id": 0,
-            "bbox": [
-                111,
-                117,
-                140,
-                177
-            ],
-            "category_id": 0
-        },
-        {
-            "image_id": 1,
-            "id": 1,
-            "bbox": [
-                121,
-                104,
-                118,
-                293
-            ],
-            "category_id": 1
-        }
+
     ]
 }

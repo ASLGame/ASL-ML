@@ -15,8 +15,10 @@ f = open(obj_directory + '/Annotations.json')
 Annotations = json.load(f)
 alphabet_dict = {}
 
-
-
+# Change initial HERE
+initial = 'A'
+#Change Image and annotation offset
+offset = 0
 for i, c in enumerate(alphabet):
     alphabet_dict.setdefault(c, i)
 
@@ -31,13 +33,15 @@ def SaveImageClassification(key, hand):
     if os.getcwd() != classification_directory + f'/{letter}':
         os.chdir(classification_directory + f'/{letter}')
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
-    filename = f'{letter}_{count}.jpg'
+
+    filename = f'{letter}_{initial}_{count}.jpg'
     cv2.imwrite(filename, hand)
 
     return [os.getcwd(), letter, filename]
 
 def SaveImageObjDetect(key, img, hand, bbox):
     letter = chr(key)
+    #Characters for Space and Delete
     if letter == '-':
         letter = "Space"
     if letter == ';':
@@ -49,21 +53,21 @@ def SaveImageObjDetect(key, img, hand, bbox):
 
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
-    filename = f'{letter}_{count}.jpg'
+    filename = f'{letter}_{initial}_{count}.jpg'
     cv2.imwrite(filename, img)
     img_dict = {
         "license" : 1,
         "filename" : filename,
         "width": w,
         "height": h,
-        "id": count
+        "id": count + offset
     }
     print("     Adding image to data folder")
     Annotations['images'].append(img_dict)
 
     annotation = {
         "image_id" : count,
-        "id" : len(Annotations['annotations']),
+        "id" : len(Annotations['annotations']) + offset,
         "bbox" : bbox,
         "category_id" : alphabet_dict[letter]
 
