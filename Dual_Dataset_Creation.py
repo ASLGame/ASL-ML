@@ -19,6 +19,8 @@ alphabet_dict = {}
 initial = 'A'
 #Change Image and annotation offset
 offset = 0
+
+
 for i, c in enumerate(alphabet):
     alphabet_dict.setdefault(c, i)
 
@@ -34,7 +36,7 @@ def SaveImageClassification(key, hand):
         os.chdir(classification_directory + f'/{letter}')
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
 
-    filename = f'{letter}_{initial}_{count}.jpg'
+    filename = f'{letter}_{initial}_{count + offset}.jpg'
     cv2.imwrite(filename, hand)
 
     return [os.getcwd(), letter, filename]
@@ -53,7 +55,7 @@ def SaveImageObjDetect(key, img, hand, bbox):
 
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
-    filename = f'{letter}_{initial}_{count}.jpg'
+    filename = f'{letter}_{initial}_{count + offset}.jpg'
     cv2.imwrite(filename, img)
     img_dict = {
         "license" : 1,
