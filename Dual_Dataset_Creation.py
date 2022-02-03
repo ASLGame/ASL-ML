@@ -9,19 +9,32 @@ detector = HandDetector(detectionCon=0.8, maxHands = 1)
 predictions = []
 padding = 50
 alphabet = 'abcdefghijklmnopqrstuvwxyz-;'
+
 classification_directory = os.getcwd() + '/Classification_Dataset'
 obj_directory = os.getcwd() + '/Obj_Dataset'
 f = open(obj_directory + '/Annotations.json')
 Annotations = json.load(f)
 alphabet_dict = {}
 
+for i, c in enumerate(alphabet):
+    alphabet_dict.setdefault(c, i)
+
+# ------------------ CHANGE HERE------------------------
 # Change initial HERE
 initial = 'A'
 #Change Object detection offset
 obj_offset = 0
+#-------------------------------------------------------
 
-for i, c in enumerate(alphabet):
-    alphabet_dict.setdefault(c, i)
+
+# Setup folders
+if os.path.exists(classification_directory) == False:
+    os.makedirs(classification_directory)
+
+if os.path.exists(obj_directory + '/Data') == False:
+    os.makedirs(obj_directory + '/Data')
+
+
 
 def SaveImageClassification(key, hand):
     letter = chr(key)
@@ -32,6 +45,10 @@ def SaveImageClassification(key, hand):
 
     print('Saving the letter: ', letter)
     if os.getcwd() != classification_directory + f'/{letter}':
+
+        if os.path.exists(classification_directory + f'/{letter}') == False:
+            os.makedirs(classification_directory + f'/{letter}')
+
         os.chdir(classification_directory + f'/{letter}')
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
 
