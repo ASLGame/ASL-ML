@@ -53,6 +53,7 @@ def SaveImageClassification(key, hand):
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
 
     filename = f'{letter}_{initial}_{count}.jpg'
+    print('Classification file: ', filename)
     cv2.imwrite(filename, hand)
 
     return [os.getcwd(), letter, filename]
@@ -72,6 +73,7 @@ def SaveImageObjDetect(key, img, hand, bbox):
     count = len([name for name in os.listdir('.') if os.path.isfile(name)])
     (h, w)  = hand.shape[:2]
     filename = f'{letter}_{initial}_{count}.jpg'
+    print('Object  detection file: ', filename)
     cv2.imwrite(filename, img)
     img_dict = {
         "license" : 1,
