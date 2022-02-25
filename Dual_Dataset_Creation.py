@@ -89,7 +89,7 @@ def SaveImageObjDetect(key, img, hand, bbox):
         "image_id" : count + obj_offset,
         "id" : len(Annotations['annotations']) + obj_offset,
         "bbox" : bbox,
-        "category_id" : alphabet_dict[letter]
+        "category_id" : alphabet_dict[chr(key)]
 
     }
     print("     Adding annotation...")
