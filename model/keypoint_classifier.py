@@ -11,7 +11,7 @@ from app_files import calc_landmark_list, pre_process_landmark, logging_csv
 
 
 
-ASL_model = load_model('keypoint_classifier_new3.h5')
+ASL_model = load_model('keypoint_classifier_final.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
