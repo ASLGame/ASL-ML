@@ -67,6 +67,7 @@ while True:
 
             debug_image = draw_info_text(
                 debug_image,
+                prediction[0][letter],
                 alphabet[letter])
 
     fps = int(1 / (new_frame_time - prev_frame_time))
