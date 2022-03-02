@@ -2,12 +2,11 @@
 ML model responsible for detecting ASL letters. 
 
 File Descriptions:
-  - ImageCreator -> Used the .h5 file from the notebook at [1]. Using tensorflow to load this model and predict realtime hand signs using a webcam. As expected, it is highly inaccurate due to the trainning data not being diverse enough.
-  - Dataset_Creation -> Creates a hand sign dataset for image classification. Press on your keyboard the letter you wish to save.
-  - Dual_Dataset_Creation -> Has Dataset_creations functionality, but it also creates the Object detection dataset for the hand signs. This dataset is made in COCO format.
+  - Model/ -> Used the .h5 file of our trained model to predict the ASL alphabet. You just need to run the 
+  - Dual_Dataset_Creation -> Creates full image dataset that will be used for the keypoint dataset
+  - landmark_dataset creation -> Analyzes each image in the Obj_dataset/data and logs their keypoints into a csv file
   
   
   
 References:
 
-[1] https://www.kaggle.com/ryuodan/asl-detection-walkthrough
