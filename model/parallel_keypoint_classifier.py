@@ -16,7 +16,8 @@ from WebCamStream import WebcamStream
 webcam_stream = WebcamStream()
 webcam_stream.start()
 
-ASL_model = load_model('keypoint_classifier_final.h5')
+ASL_R_model = load_model('R_keypoint_classifier_final.h5')
+ASL_L_model = load_model('L_keypoint_classifier_final.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
@@ -48,32 +49,37 @@ while True:
 
     num_frames_processed += 1
 
-    debug_image = copy.deepcopy(image)
+    #debug_image = copy.deepcopy(image)
 
     image.flags.writeable = False
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    results = hands.process(cv2.flip(image, 1))
+    results = hands.process(image)
 
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
-            landmark_list = calc_landmark_list(debug_image, hand_landmarks)
+            landmark_list = calc_landmark_list(image, hand_landmarks)
             pre_processed_landmark_list = np.array(pre_process_landmark(landmark_list))
             pre_processed_landmark_list = np.array([pre_processed_landmark_list], dtype=np.float32)
             key = cv2.waitKey(1) & 0xFF
             # if key == ord('p'):
-            prediction = ASL_model.predict(pre_processed_landmark_list)
+            handedness = results.multi_handedness[0].classification[0].label
+
+            if  handedness == 'Left':
+                prediction = ASL_L_model.predict(pre_processed_landmark_list)
+            else:
+                prediction = ASL_R_model.predict(pre_processed_landmark_list)
 
             letter = np.argmax(prediction)
 
             debug_image = draw_info_text(
-                debug_image,
+                image,
                 prediction[0][letter],
                 alphabet[letter])
 
     fps = int(1 / (new_frame_time - prev_frame_time))
     prev_frame_time = new_frame_time
-    cv2.putText(debug_image, str(fps), (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3, cv2.LINE_AA)
-    cv2.imshow('MainWin', debug_image)
+    cv2.putText(image, str(fps), (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3, cv2.LINE_AA)
+    cv2.imshow('MainWin', image)
     close = cv2.waitKey(1) & 0xFF
 
     if close == ord("q"):
