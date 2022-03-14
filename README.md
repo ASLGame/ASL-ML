@@ -5,6 +5,7 @@ File Descriptions:
   - Model/ -> Used the .h5 file of our trained model to predict the ASL alphabet. You just need to run parallel_keypoint_classifier.py for testing out the model. 
   - Dual_Dataset_Creation -> Creates full image dataset that will be used for the keypoint dataset
   - landmark_dataset_creation -> Analyzes each image in the Obj_dataset/data and logs their keypoints into a csv file
+  - ASL-HandPose/ -> Contains the JS and html code for deploying the model on the web browser in locahost. 
   
   
   
